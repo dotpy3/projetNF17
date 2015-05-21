@@ -1,0 +1,47 @@
+html{
+	width:100%;
+	height:auto;
+}
+
+body{
+    text-align:center;
+	margin-top:50px;
+}
+
+nav{
+	position:fixed;
+	top:0;
+	width:100%;
+	background-color:#FFF;
+}
+
+h1,h2,span{
+	color:rgb(150, 150, 150);
+}
+
+h2{
+	margin:0;
+    margin-bottom:-.35em;
+    padding:0;
+    text-align:left;
+    font-weight:normal;
+}
+
+#etapes{
+	display:block;
+	clear:both;
+	border:1px dashed black;
+	padding:10px;
+	margin:10px;
+	text-align:justify;
+	width:986px;
+	float:left;
+}
+
+#recettes ul{
+	width:300px;
+}
+
+#etapes li{
+	margin: 10px 0;
+}

@@ -1,0 +1,10 @@
+h1,h2,span{
+	color:rgb(50,200,50) /*vert*/
+}
+
+.list_div ul{
+	height:500px;
+	margin:10px;
+	overflow:auto;
+}
+

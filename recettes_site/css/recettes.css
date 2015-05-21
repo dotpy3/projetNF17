@@ -1,0 +1,8 @@
+h1,h2,span{
+	color:rgb(255, 150, 0); /*orange*/
+}
+
+.list_div ul{
+	width:auto;
+	margin:10px;
+}

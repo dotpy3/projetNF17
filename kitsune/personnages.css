@@ -1,0 +1,100 @@
+* {
+	padding: 0;
+	margin: 0;
+	font-family: calibri;
+}
+
+h1 {
+	border: none;
+	text-align: left;
+	margin-top: 10px;
+	margin-left: 50px;
+	width: 35%;
+}
+
+p {
+	font-family: calibri;
+}
+
+hr{
+	width: 100%;
+	float: left;
+}
+
+.bloc_descriptif {
+	clear: left;
+	float: left;
+	margin-left: 50px;
+	margin-top: 10px;
+	border: 1px dashed teal;
+	padding: 10px;
+}
+
+.bloc_descriptif2 {
+	float: left;
+	margin-left: 50px;
+	margin-top: 10px;
+	border: 1px dashed teal;
+	padding: 10px;
+}
+
+table {
+	font-family: calibri;
+}
+
+.cg{
+	text-align: left;
+	font-style: italic;
+	padding-right: 5px;
+	vertical-align: top;
+	font-variant: small-caps;
+}
+
+.cd{
+	text-align: left;
+	width: 300px;
+}
+
+.cd2{
+	text-align: left;
+	width: 630px;
+}
+
+.last_block {
+	clear: left;
+	float: left;
+	margin-top: 20px;
+	margin-left: 50px;
+	padding: 10px;
+	border: 1px dashed teal;
+	width: 75%;
+	text-align: justify;
+}
+
+#persopic {
+	clear: both;
+	float: right;
+	padding-right: 50px;
+	position: relative;
+	bottom: 50px;
+}
+
+ul {
+	padding-left: 10px;
+}
+
+/* -------------------------------------------------- PERSONNAGES SECONDAIRES -------------------------------------------------- */
+#content_secondaires {
+	border: 1px teal dashed;
+	margin: 20px;
+	padding: 10px;
+}
+
+#ligne0 td {
+	font-weight: bolder;
+	border-bottom: 1px teal solid;
+}
+
+#secondaires td {
+	padding: 5px 10px;
+}

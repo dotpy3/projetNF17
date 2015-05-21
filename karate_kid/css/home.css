@@ -1,0 +1,103 @@
+html{
+  padding:0;
+  margin:0;
+  font-family:Calibri;
+  background-color:rgb(255,255,165);
+}
+
+/* ---------------------------------------- MENUS ---------------------------------------- */
+
+nav{
+  padding:0;
+  margin:0;
+  background-image: url(../images/bamboo_pattern.png);
+  height:100%;
+  width:250px;
+  float:left;
+}
+
+#menu{
+  margin:0;
+  padding:0;
+  list-style:none;
+  width: 250px;
+  text-align:center;
+  font-weight:bolder;
+}
+
+#menu ul {
+  padding:0;
+  margin:0;
+  list-style:none;
+  width: 250px;
+}
+
+#menu li {
+  position: relative;
+}
+
+#menu li li{
+  text-align:left;
+}
+
+#menu li li a{
+  display:inherit;
+  margin:0;
+  padding:5px;
+  position:relative;
+  top:-5px; /*-5 pour aligner verticalement par rapport au menu-père / 10px pour aligner horizontalement le 1er li avec le menu-père*/
+  width:150px;
+  background-color:rgb(187,207,86);
+}
+
+#menu a {
+  display:inline-block;
+  text-decoration: none;
+  color: #000;
+  border:1px solid white;
+  background-color:rgb(156,179,51);
+  width:200px;
+  padding:20px 10px;
+  margin-top:10px;
+}
+
+#menu ul {
+  position: absolute;
+  left:-999em;
+}
+
+#menu li:hover ul {
+  top: 0;
+  left: 250px;
+}
+
+#menu a:hover{
+  background-color:rgb(187,207,86);
+}
+
+#menu li li a:hover{
+  background-color:rgb(156,179,51);
+}
+
+#kfp1-small{
+  width:200px;
+  margin-top:10px;
+}
+
+/* ---------------------------------------- COMMUNS ---------------------------------------- */
+h1{
+  margin:0;
+  padding:0;
+  font-weight: normal;
+  font-size:4em;
+  font-family: "Bamboo";
+  color:green;
+}
+
+#main{
+	float:left;
+	margin:0;
+	margin-left:10px;
+	padding:0;
+  width:auto;
+}

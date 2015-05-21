@@ -1,0 +1,47 @@
+6. Karaté Kid
+Description générale
+
+L'objectif de l'application est de créer une application de gestion de compétitions de karaté, incluant les karatékas (personnes qui prat22:42 21/05/2015iquent le karaté) et les compétitions. Une compétition est organisée comme un tournoi : chaque gagnant d'une confrontation passe à l'étape suivante jusqu'à ce qu'il ne reste qu'un gagnant.
+Hypothèses
+
+    Chaque compétition se caractérise par un nom, une date, un lieu ; elle implique plusieurs participants, se compose de plusieurs matchs, et d'un classement final. On gère aussi les photos de chaque compétition, ainsi que son site Web, le mail de contact...
+
+    Les compétitions sont des compétitions de kumite (combat), katas (démonstration de mouvements chorégraphiée) ou de tameshi wari (cassage de planches de bois, dalles de ciment, de glace...) ; il existe des compétitions mixtes pour lesquelles l'épreuve est tirée au sort au début de chaque confrontation.
+
+    Chaque karatéka est caractérisé par un nom, un poids, une taille, un age, une photo, une ceinture (couleur de jaune à noir), un nombre de dans (grade) pour les ceintures noires...
+
+    Pour chaque karatéka on gère l'historique de toutes ses confrontations : s'il a gagné et par quel score (nombre de points obtenus et nombre de points obtenus par l'adversaire).
+
+    L'application gère également les katas, avec leur nom en japonais, la traduction en français, une description, une ou plusieurs vidéos de démonstration, un schéma avec tous les mouvements, la liste de tous les mouvements, le nombre de mouvements, la ceinture et le nombre de dans correspondant à cet apprentissage... Les katas sont également catégorisé en fonction d'une famille de katas (avec un nom en japonais et en français, comme "Heian" qui signifie "Paix tranquille"), "Taikyoku", "Tekki"...). Pour chaque confrontation de type kata on enregistre le kata correspondant. Enfin pour chaque karatéka on peut enregistrer les katas qu'il maîtrise.
+
+    L'application gère tous les mouvements du karaté, caractérisés par un nom en japonais et une traduction, un schéma, des catégories (déplacement, défense, techniques de bras, techniques de jambes...) et des sous-catégories (poings, coudes, pied, genoux, positions, projections, clés...). On gérera liste ordonnée des mouvements pour chaque kata. Pour chaque compétition de kumite on enregistre les catégories de coups interdits (ex : coudes, genoux), ainsi que le nombre de points en fonction de chaque catégorie (ex : pieds 2 points, poings 1 points). Enfin pour chaque confrontation de type kumite on enregistre chaque coup ayant marqué au moins un point.
+
+    L'application permet enfin de gérer tous les clubs de karaté. Ils sont identifiés par un nom, un site Web, les coordonnées du dirigeant, la liste des professeurs et des karatékas qui sont inscrits, les compétitions qu'ils organisent...
+
+Besoins
+
+    Initialiser la base avec tous les katas, mouvements et grades du karaté (à partir d'un fichier CSV ou XML).
+
+    Créer des karatékas, des clubs et des compétitions à l'aide d'une interface graphique
+
+    Inscrire des karatékas dans des clubs et à des compétitions
+
+    Saisir le résultat des confrontations au fur et à mesure
+
+    Obtenir la liste de toutes confrontations et résultats (classement par karatéka et par club) d'une compétition en cours ou terminée
+
+    Obtenir le descriptif complet d'un karatéka (avec toutes ses compétitions et confrontations)
+
+Références
+
+http://www.blackbeltwiki.com/shotokan-karate-katas
+
+http://www.karate-do.be/positions.php
+
+http://www.karate-do.be/techniques-bloquage.php
+
+http://www.karate-do.be/techniques-poing.php
+
+http://www.karate-do.be/techniques-pied.php
+
+http://www.ckam.ch/techn/techkarate.htm
