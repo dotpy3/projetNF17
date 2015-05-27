@@ -1,0 +1,19 @@
+REMARQUES (maj 0.1) :
+• professeur : id_clob IMPOSSIBLE DE mettre a NULL pbm !! on a dit qu'il pouvait y avoir des professeurs sans club
+•`dans kata : shodan dans Heian et Tekki ? 
+• créer une petite base de karatekas, cubs, compétitions, matches etc pour faire les tests
+• ID pour les katas (PITIÉ) car string + trop long + nom français parfois identiques
+• ajout de la colonne SCHEMAS pour la table KATA
+• pk taille ne peut être null mais poids oui ?
+
+A FAIRE
+• Supprimer match_mixte car ne correspond à RIEN ce sont les compétitions qui sont mixtes; ensuite le type du match est tiré au sort à chaque début de match
+• page suivi des competition : remplacer les 4 requêtes par 1 ?	
+				+ remplacer le copier-coller de code par une boucle avec énumération sur le type (katas/kumite/tameshi_wari/mixte)
+• page "suivi_competition_action" : optimiser requête en en faisant 1 seule (via récupération du type du form précédent)
+• ajouter contrainte sur la table des matches pour que les 2 karatekas soient OBLIGATOIREMENT différents
+• limiter les dans à 10 STRUCTURELLEMENT
+• id pour les clubs ?
+• page add_karateka_action : vérifier les messages de retour (erreurs potentielles)
+• DEBUG add_karateka : ADD UNKNOWN ERROR (SQL syntax ?)
+• toutes les suppressions (/!\ cascade)

@@ -9,12 +9,14 @@
 				<tr><td>Site web :</td><td><?php echo $_POST['siteweb']; ?></td></tr>
 				<tr><td>Coordonnées :</td><td><?php echo $_POST['coordonnees']; ?></td></tr>
 				<tr><td>Professeur :</td><td>
+				<!-- Première solution : création de 5 champs pour 5 premiers professeurs -->
 				<?php
 					for ($i=0; $i<$_POST['i']; $i++){
 						$indice="pr".$i;
 						if($_POST[$indice]!=""){echo $_POST[$indice]."<br/>";};
 					}
-				?></td></tr>
+				?>
+				</td></tr>
 			</table><br/>
 			<input class="button" type="button" value="Retour" onclick="history.go(-1)"/>
 			<input class="button" type="submit" value="Valider"/>

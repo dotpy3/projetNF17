@@ -1,7 +1,7 @@
 6. Karaté Kid
 Description générale
 
-L'objectif de l'application est de créer une application de gestion de compétitions de karaté, incluant les karatékas (personnes qui pratiquent le karaté) et les compétitions. Une compétition est organisée comme un tournoi : chaque gagnant d'une confrontation passe à l'étape suivante jusqu'à ce qu'il ne reste qu'un gagnant.
+L'objectif de l'application est de créer une application de gestion de compétitions de karaté, incluant les karatékas (personnes qui prat22:42 21/05/2015iquent le karaté) et les compétitions. Une compétition est organisée comme un tournoi : chaque gagnant d'une confrontation passe à l'étape suivante jusqu'à ce qu'il ne reste qu'un gagnant.
 Hypothèses
 
     Chaque compétition se caractérise par un nom, une date, un lieu ; elle implique plusieurs participants, se compose de plusieurs matchs, et d'un classement final. On gère aussi les photos de chaque compétition, ainsi que son site Web, le mail de contact...

@@ -1,0 +1,27 @@
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "INSERT INTO MyGuests (firstname, lastname, email)
+    VALUES ('John', 'Doe', 'john@example.com')";
+    // use exec() because no results are returned
+    $conn->exec($sql);
+    echo "New record created successfully";
+    }
+catch(PDOException $e)
+    {
+    echo $sql . "<br>" . $e->getMessage();
+    }
+
+$conn = null;
+?> 
+
+
+
+/*	if (!$mysqli->query("SET a=1")) {
+    printf("Message d'erreur : %s\n", $mysqli->error); }*/
+
+
+
+INSERT INTO karateka (`id`, `id_club`, `nom`, `poids`, `taille`, `dateNais`, `photo`, `ceinture`, `dans`) VALUES
+(NULL,1,'Pandikorn',67,167,'1935-06-05',NULL,'noire',11:38 26/05/201511:38 26/05/20158);

@@ -5,25 +5,48 @@
 		<form method="POST" action="suivi_competitions_action.php">
 			<table>
 				<tr><td>Choisir la compétition :</td><td>
-					<select name="competition">
-						<?php echo "<option>extraire liste des compétitions non terminées / en cours d'exe (date)</option>";?>
-					</select>
-				</td></tr>
-				<tr><td colspan="2">
-					<?php
-						for($i=1; $i<=5; $i++){
-							$indice=$i+1;
-							echo "Mouvement ".$i." : <select name='move".$i."'>
-								<option value='0'></option>
-								<option>Liste extraite des mouvements autorisés</option>
-							</select><br/>";
-						};
-						echo "<input name='i' value='5' HIDDEN>"
-					?>
+						<?php
+							echo "<select name='nom_competition'>";
+								$query = "SELECT `nom`
+											FROM `competition_katas`
+											ORDER BY `nom`;";
+								$reponse = $bdd->query($query);
+								echo "<optgroup label='katas'>";
+								while($data = $reponse->fetch()){ echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
+								echo "</optgroup>";
+								
+								$query = "SELECT `nom`
+											FROM `competition_kumite`
+											ORDER BY `nom`;";	
+								$reponse = $bdd->query($query);
+								echo "<optgroup label='kumite'>";
+								while($data = $reponse->fetch()){
+									echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
+								echo "</optgroup>";
+
+								$query = "SELECT `nom`
+											FROM `competition_tameshi_wari`
+											ORDER BY `nom`;";
+								$reponse = $bdd->query($query);
+								echo "<optgroup label='tameshi wari'>";
+								while($data = $reponse->fetch()){
+									echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
+								echo "</optgroup>";
+
+								$query = "SELECT `nom`
+											FROM `competition_mixte`
+											ORDER BY `nom`;";
+								$reponse = $bdd->query($query);
+								echo "<optgroup label='mixte'>";
+								while($data = $reponse->fetch()){
+									echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
+								echo "</optgroup>";
+							echo "</select><br/>";
+						?>	
 				</td></tr>
 			</table><br/>
 			<input class="button" type="reset" value="Effacer"/>
 			<input class="button" type="submit" value="Valider"/>
 		</form>
 </body>
-<?php include("include/foot.php"); ?>
+<?php include("include/foot.php"); ?>;

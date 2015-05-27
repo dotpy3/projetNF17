@@ -20,7 +20,7 @@ Global :
 • liste des tables
 • implémentation des tables
 • liste des requêtes 
-• algo extraction d'un fichier CSV / XML (fonction php)
+• algo extraction d'un fichier CSV / XML (fonction php ?)
 • méthode classement à partir des scores de tous les karatekas
 • refaire diagramme UML
 • RE-ACTUALISATION DES FORMULAIRES AVEC LES DONNEES VIA GET
@@ -45,3 +45,6 @@ Liste des pages PHP:
 - modifier club/karateka/compettions etc
 - suppression de tout
 - supprimer l'inscription d'un karateka 
+
+
+Pour Consulter>Compétitions : faire un <select> pour choisir 1 compétition ou affichage de TOUTES (surcharge ?)
