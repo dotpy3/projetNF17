@@ -51,8 +51,9 @@
 		$fin = ");";
 		
 		$query = $debut.$id.",".$club.",".$nom.",".$poids.",".$taille.",".$dateNais.",".$photo.",".$ceinture.",".$dans.$fin;
+//		echo "Requête d'ajout à la table : </br>".$query ;
 		//récupération des éventuels messages d'erreurs
-/*		try {
+		try {
 			// set the PDO error mode to exception
     		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$bdd->exec($query); //vérifier les messages de retour (erreurs potentielles)
@@ -60,14 +61,31 @@
 	    }
 		catch(PDOException $e){
 	    	echo "<br/>ERREUR REQUETE : ".$query . "<br/>CODE ERREUR : " . $e->getMessage();
-	    }*/
+	    }
 		
 		//création des requêtes pour la table maîtrise (des katas)
-		$debut = "INSERT INTO maitrise (`id_karateka`,`id_kata`) VALUES";
-		$query = "SELECT `id` FROM karateka WHERE nom=".$_POST['nom'];
-		$id_karateka = NULL;
+		$query = "SELECT `id` FROM karateka WHERE `nom`='".$_POST['nom']."';";
+//		echo "<br/>Requête ajout des maîtrises :<br/>".$query;
+		$reponse = $bdd->query($query);
+		$data = $reponse->fetch();
+		$id_karateka = $data['id'];
+
+		$debut = "INSERT INTO maitrise (`id_karateka`,`id_kata`) VALUES (";
 		//boucles pour tous les ajouter
-		$id_kata = NULL;
+		for($i=0; $i<=$imax; $i++){
+			if(isset($_POST[$i])){
+				echo "</br>";
+				$ajout = $debut."'".$id_karateka."', '".$i."');";
+				try {
+		    		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					$bdd->exec($ajout); //vérifier les messages de retour (erreurs potentielles)
+					echo "<br/>Le kata a bien été ajouté !";
+				}
+				catch(PDOException $e){
+	    		echo "<br/>ERREUR REQUETE : ".$ajout . "<br/>CODE ERREUR : " . $e->getMessage();
+	    		}
+			}
+		}
 		
 		?>
 	</div>

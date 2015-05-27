@@ -19,7 +19,15 @@
 						if($data['ceinture']=='noire')
 					echo"<tr><td>Dans :</td><td>".$data['dans']."</td></tr>";
 					echo"<tr><td>Photo :</td><td><img src='".$data['photo']."' alt='[pas de photo disponible]' /></td></tr>
-						<tr><td>Katas maîtrisés :</td><td>"."/Liste extraite/"."</td></tr>
+						<tr><td>Katas maîtrisés :</td><td>";
+						//extraction liste des katas maîtrisés
+						$query = "SELECT * FROM `maitrise`,`kata` WHERE `id_karateka`=".$id_karateka." AND `maitrise`.`id_kata`=`kata`.`id`;";
+						$reponse = $bdd->query($query);
+						while($data = $reponse->fetch()){
+							echo $data['nom_famille']." -- ".$data['nom_jap']." (".$data['nom_fr'].")</br>";
+						}
+
+					echo"</td></tr>
 						<tr><td>Historique :</td><td>
 							<table class='tab_ii'>
 								<tr><th>nom_compet</th><th>classement</th><th>score</th></tr>

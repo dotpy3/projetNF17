@@ -114,7 +114,7 @@ CREATE TABLE kata (
 	`nom_fr` VARCHAR(100) NOT NULL,
 	`description` VARCHAR(400),
 	`videos` VARCHAR(200),
-	`schema` VARCHAR(200);
+	`schema` VARCHAR(200),
 	`ceinture` ENUM ('blanche', 'jaune', 'orange', 'verte','bleue', 'marron', 'rouge', 'noire') DEFAULT 'blanche' NOT NULL,
 	`dans` INTEGER,
 	PRIMARY KEY (`id`)
