@@ -1,19 +1,28 @@
 REMARQUES (maj 0.1) :
-• professeur : id_clob IMPOSSIBLE DE mettre a NULL pbm !! on a dit qu'il pouvait y avoir des professeurs sans club
-•`dans kata : shodan dans Heian et Tekki ? 
-• créer une petite base de karatekas, cubs, compétitions, matches etc pour faire les tests
-• ID pour les katas (PITIÉ) car string + trop long + nom français parfois identiques
-• ajout de la colonne SCHEMAS pour la table KATA
-• pk taille ne peut être null mais poids oui ?
+â€¢ professeur : id_clob IMPOSSIBLE DE mettre a NULL pbm !! on a dit qu'il pouvait y avoir des professeurs sans club
+â€¢`dans kata : shodan dans Heian et Tekki ? 
+â€¢ crÃ©er une petite base de karatekas, cubs, compÃ©titions, matches etc pour faire les tests
+â€¢ ID pour les katas (PITIÃ‰) car string + trop long + nom franÃ§ais parfois identiques
+â€¢ ajout de la colonne SCHEMAS pour la table KATA
+â€¢ pk taille ne peut Ãªtre null mais poids oui ?
 
 A FAIRE
-• Supprimer match_mixte car ne correspond à RIEN ce sont les compétitions qui sont mixtes; ensuite le type du match est tiré au sort à chaque début de match
-• page suivi des competition : remplacer les 4 requêtes par 1 ?	
-				+ remplacer le copier-coller de code par une boucle avec énumération sur le type (katas/kumite/tameshi_wari/mixte)
-• page "suivi_competition_action" : optimiser requête en en faisant 1 seule (via récupération du type du form précédent)
-• ajouter contrainte sur la table des matches pour que les 2 karatekas soient OBLIGATOIREMENT différents
-• limiter les dans à 10 STRUCTURELLEMENT
-• id pour les clubs ?
-• page add_karateka_action : vérifier les messages de retour (erreurs potentielles)
-• DEBUG add_karateka : ADD UNKNOWN ERROR (SQL syntax ?)
-• toutes les suppressions (/!\ cascade)
+â€¢ Supprimer match_mixte car ne correspond Ã  RIEN ce sont les compÃ©titions qui sont mixtes; ensuite le type du match est tirÃ© au sort Ã  chaque dÃ©but de match
+â€¢ page suivi des competition : remplacer les 4 requÃªtes par 1 ?	
+				+ remplacer le copier-coller de code par une boucle avec Ã©numÃ©ration sur le type (katas/kumite/tameshi_wari/mixte)
+â€¢ page "suivi_competition_action" : optimiser requÃªte en en faisant 1 seule (via rÃ©cupÃ©ration du type du form prÃ©cÃ©dent)
+â€¢ ajouter contrainte sur la table des matches pour que les 2 karatekas soient OBLIGATOIREMENT diffÃ©rents
+â€¢ limiter les dans Ã  10 STRUCTURELLEMENT
+â€¢ id pour les clubs ?
+â€¢ page add_karateka_action : vÃ©rifier les messages de retour (erreurs potentielles)
+â€¢ DEBUG add_karateka : ADD UNKNOWN ERROR (SQL syntax ?)
+â€¢ toutes les suppressions (/!\ cascade)
+
+
+PROJET FINAL (partiel) :
+- 1 page ajout (karateka)
+- 1 page modification (karateka)
+- 1 page suppression (karateka)
+- 1 page visualisation (karateka)
+- contrÃ´le strict des input string (casse/longueur/caractÃ¨res spÃ©ciaux etc)
+CompÃ©titions ?
