@@ -6,6 +6,7 @@
 </head>
 <?php include("include/head.php");
 if (isset($_GET['error']) && $_GET['error'] = 'noFile') $error = "<h2>Erreur : Aucun fichier envoyé</h2>";
+if (isset($_GET['error']) && $_GET['error'] = 'emptyFile') $error = "<h2>Erreur : Fichier vide</h2>";
 if (isset($_GET['error']) && $_GET['error'] = 'noSelection') $error = "<h2>Erreur : Aucune sélection de type de fichier</h2>";
 if (isset($_GET['error']) && $_GET['error'] = 'invalidType') $error = "<h2>Erreur : Fichier de type incorrect</h2>";
 else $error = "";

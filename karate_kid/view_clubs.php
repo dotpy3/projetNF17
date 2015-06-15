@@ -1,20 +1,20 @@
 <?php include("include/head.php"); ?>
 <body>
 	<?php include("include/menu.php"); ?>
-	<h1>Katas</h1>
-	<form method="POST" action="view_katas_action.php">
+	<h1>Karatekas</h1>
+	<form method="POST" action="view_clubs_action.php">
 		<?php
-			$query = "SELECT id, nom_famille,nom_jap,nom_fr
-						FROM kata
-						ORDER BY id,nom_famille,nom_fr,nom_jap";
+			$query = "SELECT *
+						FROM club
+						ORDER BY id;";
 			$reponse = pg_query($bdd,$query);
 			
-			echo "<select name='nom_kata'>";
+			echo "<select name='nom_club'>";
 			while($data = pg_fetch_array($reponse)){
-				echo "<option value='".$data['id']."'>".$data['nom_famille']." -- ".$data['nom_jap']." (".$data['nom_fr'].")"."</option>";
+				echo "<option value='".$data['id']."'>".$data['nom']."</option>";
 			}
 			echo "</select><br/>";
-		?>
+		?>		
 		<input class="button" type="reset" value="Effacer"/>
 		<input class="button" type="submit" value="Valider"/>
 	</form>

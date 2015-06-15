@@ -1,0 +1,11 @@
+query($query) -> pg_query($bdd, $query)
+INSERT INTO table(col1, col2 ...) VALUES (val1, 'val2 ...);
+$data = $bdd->fetch() -> $data = pg_fetch_array($reponse)
+
+
+
+
+$reponse->fetch() 		BY 		pg_fetch_array($reponse)
+NULL				BY		NEXTVAL('seq')
+$bdd->query(			BY		pg_query($bdd,
+`				BY 		/vide/

@@ -1,14 +1,14 @@
 <html>
 <?php
-	$host = "localhost";
-	$dbname = "karate_kid";
-	$user = "root";
-	$password = "";
-	try { $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8',$user, $password); }
+	$host='tuxa.sme.utc';
+	$port= '5432';
+	$dbname= 'dbnf17p130';
+	$user= 'nf17p130';
+	$password= 'wpBU2T6z';
+	try { $bdd = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password"); }
 	catch (Exception $e){
 	        die('Erreur : ' . $e->getMessage());
 	}
-	$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 ?>
 <head>
 	<meta charset="utf-8"/>

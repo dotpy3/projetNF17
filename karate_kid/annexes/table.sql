@@ -21,7 +21,7 @@ CREATE TABLE karateka (
 	`id_club` BIGINT(20) NOT NULL,
 	`dans` INTEGER,
 	`nom` VARCHAR(100) NOT NULL,
-	`poids` REAL,
+	`poids` REAL NOT NULL,
 	`taille` REAL NOT NULL,
 	`dateNais` DATE NOT NULL,
 	`photo` VARCHAR(200),
@@ -114,7 +114,7 @@ CREATE TABLE kata (
 	`nom_fr` VARCHAR(100) NOT NULL,
 	`description` VARCHAR(400),
 	`videos` VARCHAR(200),
-	`schema` VARCHAR(200),
+	`schema` VARCHAR(200);
 	`ceinture` ENUM ('blanche', 'jaune', 'orange', 'verte','bleue', 'marron', 'rouge', 'noire') DEFAULT 'blanche' NOT NULL,
 	`dans` INTEGER,
 	PRIMARY KEY (`id`)
@@ -270,7 +270,7 @@ INSERT INTO `kata` (`id`, `nom_famille`, `nom_jap`, `nom_fr`, `description`, `vi
 	(NULL, 'Heian', 'Nidan', 'deuxième niveau', 'Il s''agit du deuxième kata de la famille Heian (famille de 5 katas comprenant la plupart des techniques de base du karaté).', 'https://www.youtube.com/watch?v=VApwsBSx7mg', 'blanche', 0),
 	(NULL, 'Heian', 'Sandan', 'troisième niveau', 'Il s''agit du troisième kata de la famille Heian (famille de 5 katas comprenant la plupart des techniques de base du karaté).', 'https://www.youtube.com/watch?v=1DDppu5CRrc', 'blanche', 0),
 	(NULL, 'Heian', 'Shodan', 'premier niveau', 'Il s''agit du premier kata de la famille Heian (famille de 5 katas comprenant la plupart des techniques de base du karaté).', 'https://www.youtube.com/watch?v=Rgg8vF_l8ZI', 'blanche', 0),
-	(NULL, 'Tekki', 'Shodan', 'premier niveau Shodan', 'Il s''agit du premier kata de la famille Tekki (famille de 3 katas dont la particularité est de se réaliser sur un seul axe).', 'https://www.youtube.com/watch?v=vCq_VbnS5Fk', 'bleue', 0),
+	(NULL, 'Tekki', 'Shodan', 'premier niveau', 'Il s''agit du premier kata de la famille Tekki (famille de 3 katas dont la particularité est de se réaliser sur un seul axe).', 'https://www.youtube.com/watch?v=vCq_VbnS5Fk', 'bleue', 0),
 	(NULL, 'Heian', 'Yodan', 'quatrième niveau', 'Il s''agit du quatrième kata de la famille Heian (famille de 5 katas comprenant la plupart des techniques de base du karaté).', 'https://www.youtube.com/watch?v=AambQc8F0ZU', 'blanche', 0);
 	
 INSERT INTO `mvt_ordre_katas` (`nom_mouvement`, `id_kata`, `ordre`) VALUES

@@ -8,11 +8,11 @@
 				<tr><td>Nom :</td><td><?php echo $_POST['nom']; ?></td></tr>
 				<tr><td>Club :</td><td>
 				<?php
-					$query = "SELECT `id`,`nom`
-								FROM `club`
-								WHERE `id`=".$_POST['id_club'].";";
-					$reponse = $bdd->query($query);
-					$data = $reponse->fetch();
+					$query = "SELECT id,nom
+								FROM club
+								WHERE id=".$_POST['id_club'].";";
+					$reponse = pg_query($bdd,$query);
+					$data = pg_fetch_array($reponse);
 					echo $data['nom'];
 				?>
 				</td></tr>
@@ -38,8 +38,8 @@
 			<input class="button" type="button" value="Retour" onclick="history.go(-1)"/>
 		</form>
 	<?php //création de la requête pour la table karateka
-		$debut = "INSERT INTO karateka (`id`, `id_club`, `nom`, `poids`, `taille`, `dateNais`, `photo`, `ceinture`, `dans`) VALUES (";
-		$id = "NULL";
+		$debut = "INSERT INTO karateka (id, id_club, nom, poids, taille, dateNais, photo, ceinture, dans) VALUES (";
+		$id = "NEXTVAL('karateka_id_seq')";
 		$nom = "'".$_POST['nom']."'";
 		$club = $_POST['id_club'];
 		$poids = $_POST['poids'];
@@ -47,16 +47,13 @@
 		$dateNais = "'".$_POST['naiss_annee']."-0".$_POST['naiss_mois']."-0".$_POST['naiss_jour']."'";
 		$ceinture = "'".$_POST['ceinture']."'";
 		if($_POST['ceinture'] == 'noire') $dans = $_POST['dans']; else $dans = "NULL";
-		if($_POST['photo']!="") $photo = "'".$_POST['photo']."`"; else $photo = "NULL";
+		if($_POST['photo']!="") $photo = "'".$_POST['photo'].""; else $photo = "NULL";
 		$fin = ");";
 		
 		$query = $debut.$id.",".$club.",".$nom.",".$poids.",".$taille.",".$dateNais.",".$photo.",".$ceinture.",".$dans.$fin;
-//		echo "Requête d'ajout à la table : </br>".$query ;
-		//récupération des éventuels messages d'erreurs
 		try {
-			// set the PDO error mode to exception
-    		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$bdd->exec($query); //vérifier les messages de retour (erreurs potentielles)
+    		//$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			pg_query($bdd,$query);
 			echo "<br/>Le Karateka a bien été ajouté !";
 	    }
 		catch(PDOException $e){
@@ -64,29 +61,29 @@
 	    }
 		
 		//création des requêtes pour la table maîtrise (des katas)
-		$query = "SELECT `id` FROM karateka WHERE `nom`='".$_POST['nom']."';";
-//		echo "<br/>Requête ajout des maîtrises :<br/>".$query;
-		$reponse = $bdd->query($query);
-		$data = $reponse->fetch();
-		$id_karateka = $data['id'];
-
-		$debut = "INSERT INTO maitrise (`id_karateka`,`id_kata`) VALUES (";
-		//boucles pour tous les ajouter
-		for($i=0; $i<=$imax; $i++){
-			if(isset($_POST[$i])){
-				echo "</br>";
-				$ajout = $debut."'".$id_karateka."', '".$i."');";
-				try {
-		    		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$bdd->exec($ajout); //vérifier les messages de retour (erreurs potentielles)
-					echo "<br/>Le kata a bien été ajouté !";
+		$debut = "INSERT INTO maitrise (id_karateka,id_kata) VALUES (";
+			$query = "SELECT id FROM karateka WHERE nom='".$_POST['nom']."';";
+			//echo $query;
+			$reponse = pg_query($bdd,$query);
+			$data = pg_fetch_array($reponse);
+			$id_karateka = $data['id']; //récupération de l'id du karateka ajouté grâce à la requête juste précédente
+		$fin = ");";
+		
+		$imax = $_POST['imax'];
+		for($i=1;$i<=$imax; $i++){
+			if(isset($_POST[$i])){ //si le kata a été précédemment coché, on ajoute son id dans la table de maîtrise
+				$id_kata = $i;
+				$query=$debut.$id_karateka.",".$id_kata.$fin;
+				try{
+					//$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					pg_query($bdd,$query);
+					echo "<br/>Le Kata ".$id_kata." a bien été ajouté !";
 				}
 				catch(PDOException $e){
-	    		echo "<br/>ERREUR REQUETE : ".$ajout . "<br/>CODE ERREUR : " . $e->getMessage();
+	    			echo "<br/>ERREUR REQUETE : ".$query . "<br/>CODE ERREUR : " . $e->getMessage();
 	    		}
 			}
 		}
-		
 		?>
 	</div>
 </body>

@@ -7,14 +7,14 @@
 			<table>
 				<tr><td>Nom karateka :</td><td>
 					<?php
-						$query = "SELECT `id`,`nom`, `dateNais`
-									FROM `karateka`
-									ORDER BY `id`;";
-						$reponse = $bdd->query($query);
+						$query = "SELECT id,nom, dateNais
+									FROM karateka
+									ORDER BY id;";
+						$reponse = pg_query($bdd,$query);
 						
 						echo "<select name='nom_karateka'>";
-						while($data = $reponse->fetch()){
-							echo "<option value='".$data['id']."'>".$data['nom']." (".$data['dateNais'].")"."</option>";
+						while($data = pg_fetch_array($reponse)){
+							echo "<option value='".$data['id']."'>".$data['nom']." (".$data['datenais'].")"."</option>";
 						}
 						echo "</select><br/>";
 					?>		
@@ -22,12 +22,10 @@
 				<tr><td>Nom de la compétition :</td><td>
 					<?php
 						$query = "SELECT * FROM competition_katas, competition_kumite, competition_mixte, competition_tameshi_wari;"; //Regroupement logique ? Produit cartésien ? Join (INNER / OUTER)?
-						$reponse = $bdd->query($query);
+						$reponse = pg_query($bdd,$query);
 						
 						echo "<select name='nom_competition'>";
-						while($data = $reponse->fetch()){
-							echo "<option value='".$data['nom']."'>".$data['nom']." (".$data['dateComp'].")"."</option>";
-						}
+						ECHO "<option>A COMPLÉTER</option>";
 						echo "</select><br/>";
 					?>		
 				</td></tr>

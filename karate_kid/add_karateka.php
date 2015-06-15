@@ -8,13 +8,13 @@
 				<tr><td>Nom :</td><td><input class="input" type="text" name="nom" required/></td></tr>
 				<tr><td>Club :</td><td>
 					<?php
-						$query = "SELECT `id`,`nom`
-									FROM `club`
-									ORDER BY `nom`";
-						$reponse = $bdd->query($query);
+						$query = "SELECT id,nom
+									FROM club
+									ORDER BY nom";
+						$reponse = pg_query($bdd,$query);
 						
 						echo "<select name='id_club'>";
-						while($data = $reponse->fetch()){
+						while($data = pg_fetch_array($reponse)){
 							echo "<option value='".$data['id']."'>".$data['nom']."</option>";
 						}
 						echo "</select><br/>";
@@ -45,11 +45,11 @@
 				<tr><td>Photo :</td><td><input class="input" type="file" name="photo"/></td></tr>
 				<tr><td>Katas maîtrisés :</td><td>
 					<?php						
-						$query = "SELECT `id`, `nom_famille`,`nom_jap`,`nom_fr`
-						FROM `kata`
-						ORDER BY `id`,`nom_famille`,`nom_jap`,`nom_fr`";
-						$reponse = $bdd->query($query);
-						while($data = $reponse->fetch()){
+						$query = "SELECT id, nom_famille,nom_jap,nom_fr
+						FROM kata
+						ORDER BY id,nom_famille,nom_jap,nom_fr";
+						$reponse = pg_query($bdd,$query);
+						while($data = pg_fetch_array($reponse)){
 							$imax=$data['id'];
 							echo "<input type='checkbox' name='".$data['id']."' value='".$data['nom_famille']." - ".$data['nom_jap']."'/>".$data['nom_famille']." -- ".$data['nom_jap']." (".$data['nom_fr'].")<br/>";
 						}
