@@ -1,0 +1,9 @@
+<Mouvements>
+	<Mouvement>
+		<nomJap>Test</nomJap>
+		<nomFr>test</nomFr>
+		<schema>testSCH</schema>
+		<categorie>offensive</categorie>
+		<sousCategorie>coude</sousCategorie>
+	</Mouvement>
+</Mouvements>

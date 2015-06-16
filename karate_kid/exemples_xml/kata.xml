@@ -1,0 +1,22 @@
+<Katas>
+	<Kata>
+		<Famille>Heian</Famille>
+		<NomJap>Heian</NomJap>
+		<nomFrancais>Coup de pied</nomFrancais>
+		<Description>Ce kata est l'un des principaux.</Description>
+		<Video>http://youtube.com</Video>
+		<schema>http://pixenli.com/image1.png</schema>
+		<ceinture>jaune</ceinture>
+		<dans>8</dans>
+	</Kata>
+	<Kata>
+		<Famille>Tekki</Famille>
+		<NomJap>Tekki</NomJap>
+		<nomFrancais>Bonjour</nomFrancais>
+		<Description>Ce kata est l'un des principaux. Bonsoir</Description>
+		<Video>http://goat.se</Video>
+		<schema>http://pixenli.com/image2.png</schema>
+		<ceinture>vert</ceinture>
+		<dans>2</dans>
+	</Kata>
+</Katas>
