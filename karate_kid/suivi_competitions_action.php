@@ -36,7 +36,7 @@ $host='tuxa.sme.utc';
 	function printListMatch($query){
 		$tabMatchs = getListMatch($query);
 		if (count($tabMatchs) == 0) return;
-		echo "<p>Sélection de match : </p><select name=\"nom_match\">";
+		echo "<p>Sélection de match : </p><select name=\"num_match\">";
 		foreach($tabMatchs as $match){
 			echo "<option value='".$match['num_match']."'>".$match['nomMatch']."</option>";
 		}

@@ -5,6 +5,19 @@ $host='tuxa.sme.utc';
 	$user= 'nf17p146';
 	$password= 'htJ4IXmZ';
 	$GLOBALS['bdd'] = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
+
+	/*
+
+	PARAMETRES REÇUS :
+
+		- EN GET :
+			LE TYPE DE MATCH ex : match_katas, match_kumite etc
+			$_GET['type_match']
+		- EN POST :
+			LE NUMERO DE MATCH
+			$_POST['num_match']
+
+	*/
 	 ?>
 <body>
 	<?php include("include/menu.php"); ?>
