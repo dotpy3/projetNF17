@@ -17,45 +17,65 @@ $host='tuxa.sme.utc';
 		return $query;
 	}
 
-	function printListMatch($query){
+	function getListMatch($query){
 
 		// AFFICHE LA LISTE DES MATCHS
 		// RETOURNE LE NOMBRE DE MATCHS TROUVÉS
 
 		$reponse = pg_query($GLOBALS['bdd'], $query);
 		if( !($data = pg_fetch_array($reponse,null,PGSQL_ASSOC))){
-			return 0;
+			return array();
 		} else {
-			echo "<p>Sélection de match : </p><select name=\"nom_match\">"; $i = 1;
 			do {
-				echo "<option value='".$data['num_match']."_".$data['nom_competition']."'>".$data['idk1']." VS ".$data['idk2']."</option>";
-				$i+=1;
+				$echo[] = array('num_match' => $data['num_match'], 'nomMatch' => $data['idk1']." VS ".$data['idk2']);
 			} while ($data = pg_fetch_array($reponse,null,PGSQL_ASSOC));
-			echo "</select>";
-			return $i;
+			return $echo;
 		}
 	}
+
+	function printListMatch($query){
+		$tabMatchs = getListMatch($query);
+		if (count($tabMatchs) == 0) return;
+		echo "<p>Sélection de match : </p><select name=\"nom_match\">";
+		foreach($tabMatchs as $match){
+			echo "<option value='".$match['num_match']."'>".$match['nomMatch']."</option>";
+		}
+		echo "</select>";
+		return;
+	}
+
+	if (!isset($_POST['nom_competition'])) header('Location: suivi_competitions.php');
+	 				$nom_comp = $_POST['nom_competition'];
+					$nbMatchsACeNom=0;
+
+					$query1=generateSelectQuery("match_katas",$nom_comp);
+					$redirection = "";
+					if (count(getListMatch($query1)) > 0) $redirection="match_katas";
+
+					$query2 = generateSelectQuery("match_kumite",$nom_comp);
+					$nbMatchsACeNom+=count(getListMatch($query2));
+					if (count(getListMatch($query2)) > 0) $redirection="match_kumite";
+
+					$query3=generateSelectQuery("match_mixte",$nom_comp);
+					$nbMatchsACeNom+=count(getListMatch($query3));
+					if (count(getListMatch($query3)) > 0) $redirection="match_mixte";
+
+					$query4 = generateSelectQuery("match_tameshi_wari",$nom_comp);
+					$nbMatchsACeNom+=count(getListMatch($query4));
+					if (count(getListMatch($query4)) > 0) $redirection="match_tameshi_wari";
 	?>
 <body>
 	<?php include("include/menu.php"); ?>
 	<h1>Choisir match</h1>
-	<form method="POST" action="suivi_competitions_action2.php">
+	<form method="POST" action="suivi_competitions_action2.php?type_match=<?php echo $redirection; ?>">
 		<table>
-			<tr><td>Compétition :</td><td><?php $nom_comp = $_POST['nom_competition']; echo $nom_comp; ?></td></tr>
+			<tr><td>Compétition :</td><td><?php echo $nom_comp; ?></td></tr>
 			<?php
-				if (!isset($_POST['nom_competition'])) header('Location: suivi_competitions.php');
-					$nbMatchsACeNom=0;
-					$query=generateSelectQuery("match_katas",$nom_comp);
-					$nbMatchsACeNom+=printListMatch($query);
-
-					$query = generateSelectQuery("match_kumite",$nom_comp);
-					$nbMatchsACeNom+=printListMatch($query);
-
-					$query=generateSelectQuery("match_mixte",$nom_comp);
-					$nbMatchsACeNom+=printListMatch($query);
-
-					$query = generateSelectQuery("match_tameshi_wari",$nom_comp);
-					$nbMatchsACeNom+=printListMatch($query);
+				
+					printListMatch($query1);
+					printListMatch($query2);
+					printListMatch($query3);
+					printListMatch($query4);
 
 					if ($nbMatchsACeNom == 0) echo "<p>Pas de matchs</p>";
 //				while($data = $reponse->fetch()){ echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }

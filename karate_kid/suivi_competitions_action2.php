@@ -1,4 +1,11 @@
-<?php include("include/head.php"); ?>
+<?php include("include/head.php");
+$host='tuxa.sme.utc';
+	$port= '5432';
+	$dbname= 'dbnf17p146';
+	$user= 'nf17p146';
+	$password= 'htJ4IXmZ';
+	$GLOBALS['bdd'] = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
+	 ?>
 <body>
 	<?php include("include/menu.php"); ?>
 	<h1>Declarer le vainqueur</h1>
