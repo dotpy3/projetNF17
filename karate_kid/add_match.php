@@ -10,15 +10,14 @@ $host='tuxa.sme.utc';
 function addOptionsToSelect($competitionType){
 	$query="SELECT * FROM ".$competitionType;
 	$reponse = pg_query($GLOBALS['bdd'],$query);
-	$echo = "<optgroup label='".$competitionType.">'";
 	while($data = pg_fetch_array($reponse,null,PGSQL_ASSOC)){
-		$echo.='<option value="'.$data['nom']."'>".$data['nom']."</option>";
+		$echo='<option value="'.$data['nom']."'>".$data['nom']."</option>";
+		var_dump($data);
 	}
-	$echo .= "</optgroup>";
 	return $echo;
 }
 
-
+?>
 
 <body>
 	<?php include("include/menu.php"); ?>
@@ -33,6 +32,10 @@ function addOptionsToSelect($competitionType){
 			echo addOptionsToSelect("competition_kumite");
 			echo addOptionsToSelect("competition_tameshi_wari");
 			echo addOptionsToSelect("competition_mixte");
+
+			?>
+
+			<?php
 			echo "</select><br/>";
 		?>		
 		<input class="button" type="reset" value="Effacer"/>
