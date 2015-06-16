@@ -65,9 +65,11 @@ function traitementXMLMouvements($contenuNonParse){
 		$schema = pg_escape_string($mvtEtudie->schema);
 		$categ = pg_escape_string($mvtEtudie->categorie);
 		$sousCateg = pg_escape_string($mvtEtudie->sousCategorie);
-		$vSql = "INSERT INTO mouvements (nom_jap,nom_fr,schema,ceinture,categorie,sous_categorie)
+		$vSql = "INSERT INTO mouvements (nom_jap,nom_fr,schema,categorie,sous_categorie)
 		VALUES ('$nomJap','$nomFr','$schema','$categ','$sousCateg');";
 		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+		var_dump($vQuery);
+		return;
 		header('Location: init.php?message=xmlMvtReceived');
 	}
 
