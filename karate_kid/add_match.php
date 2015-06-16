@@ -13,7 +13,7 @@ function addOptionsToSelect($competitionType){
 	$reponse = pg_query($GLOBALS['bdd'],$query);
 	$echo="<optgroup label='".$competitionType."'>";
 	while($data = pg_fetch_array($reponse,null,PGSQL_ASSOC)){
-		$echo.='<option value="'.$data['nom']."/".$competitionType."\">".$data['nom']."</option>";
+		$echo.='<option value="'.$data['nom']."/".$data['datecomp']."/".$competitionType."\">".$data['nom']."</option>";
 		$donnees = true;
 	}
 	$echo.="</optgroup>";
@@ -47,6 +47,12 @@ function getListClub(){
 		<?php
 			$query = "SELECT * FROM competition_katas, competition_kumite, competition_tameshi_wari, competition_mixte ;";
 			$reponse = pg_query($bdd,$query);
+
+			if (isset($_GET['retour'])){
+				if($_GET['retour'] == 'ok') echo "<h2>Enregistré !</h2>";
+			 else 
+				echo "Échec de l'ajout";
+			}
 			
 			echo "<select name=\"id_competition\">";
 			echo addOptionsToSelect("competition_katas");
@@ -77,6 +83,7 @@ function getListClub(){
 				</select>
 				Score : <input type="text" name="scorej2">
 				</p>
+				<p>Lieu :</p><input type="text" name="lieu">
 				<p>Type match (pour les mixtes) :
 				<select name="typeMatch">
 					<option value="katas">Katas</option>
@@ -84,8 +91,7 @@ function getListClub(){
 					<option value="tameshi_wari">Tameshi Wari</option>
 				</select>
 				</p>
-				</form>
-				
+
 			<?php
 			echo "</select><br/>";
 		?>		
