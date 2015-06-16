@@ -34,8 +34,6 @@ function traitementCSVKata($fichier){
 		$vSql = "INSERT INTO kata (nom_famille,nom_jap,nom_fr,description,videos,schema,ceinture,dans)
 		VALUES ('$famille','$nomJap','$nomFr','$desc','$video','$schema','$ceintureChoisie',$dan);";
 		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
-		var_dump($vQuery);
-		return;
 	}
 	header('Location: init.php?message=csvKataReceived');
 }
@@ -50,8 +48,6 @@ function traitementCSVGrades($fichier){
 		else $dan = 0;
 		$vSql = "UPDATE karateka SET ceinture = '".$ceinture."', dans = '".$dan ."' WHERE nom = '".$nomKar."'";
 		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
-		var_dump($vQuery);
-		return;
 	}
 	header('Location: init.php?message=csvKataReceived');
 }
@@ -68,8 +64,6 @@ function traitementCSVMouvements($fichier){
 		$vSql = "INSERT INTO mouvements (nom_jap,nom_fr,schema,categorie,sous_categorie)
 		VALUES ('$nomJap','$nomFr','$schema','$categ','$sousCateg');";
 		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
-		var_dump($vQuery);
-		return;
 	}
 	header('Location: init.php?message=csvMvtReceived');
 }
