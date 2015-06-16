@@ -26,6 +26,7 @@ $host='tuxa.sme.utc';
 		if( !($data = pg_fetch_array($reponse,null,PGSQL_ASSOC))){
 			return array();
 		} else {
+			$echo = array();
 			do {
 				$echo[] = array('num_match' => $data['num_match'], 'nomMatch' => $data['idk1']." VS ".$data['idk2']);
 			} while ($data = pg_fetch_array($reponse,null,PGSQL_ASSOC));
