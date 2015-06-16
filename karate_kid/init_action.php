@@ -20,20 +20,57 @@ function checkNotEmpty($tab){
 }
 
 function traitementCSVKata($fichier){
-	$vSql = "COPY kata FROM '$fichier' DELIMITER ',' CSV;";
-	$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+	$file_handle = fopen($fichier, "r");
+	while(!feof($file_handle)){
+		$line_of_text = fgetcsv($file_handle,1024);
+		$famille = pg_escape_string($line_of_text[0]);
+		$nomJap = pg_escape_string($line_of_text[1]);
+		$nomFr = pg_escape_string($line_of_text[2]);
+		$desc = pg_escape_string($line_of_text[3]);
+		$video = pg_escape_string($line_of_text[4]);
+		$schema = pg_escape_string($line_of_text[5]);
+		$ceintureChoisie = pg_escape_string($line_of_text[6]);
+		$dan = pg_escape_string($line_of_text[7]);
+		$vSql = "INSERT INTO kata (nom_famille,nom_jap,nom_fr,description,videos,schema,ceinture,dans)
+		VALUES ('$famille','$nomJap','$nomFr','$desc','$video','$schema','$ceintureChoisie',$dan);";
+		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+		var_dump($vQuery);
+		return;
+	}
 	header('Location: init.php?message=csvKataReceived');
 }
 
 function traitementCSVGrades($fichier){
-	$vSql = "COPY kata FROM '$fichier' DELIMITER ',' CSV;";
-	$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+	$file_handle = fopen($fichier, "r");
+	while(!feof($file_handle)){
+		$line_of_text = fgetcsv($file_handle,1024);
+		$nomKar = pg_escape_string($line_of_text[0]);
+		$ceinture = pg_escape_string($line_of_text[2]);
+		if ($ceinture == 'noire') $dan = $line_of_text[1];
+		else $dan = 0;
+		$vSql = "UPDATE karateka SET ceinture = '".$ceinture."', dans = '".$dan ."' WHERE nom = '".$nomKar."'";
+		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+		var_dump($vQuery);
+		return;
+	}
 	header('Location: init.php?message=csvKataReceived');
 }
 
 function traitementCSVMouvements($fichier){
-	$vSql = "COPY mouvements FROM '$fichier' DELIMITER ',' CSV;";
-	$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+	$file_handle = fopen($fichier, "r");
+	while(!feof($file_handle)){
+		$line_of_text = fgetcsv($file_handle,1024);
+		$nomJap = pg_escape_string($line_of_text[0]);
+		$nomFr = pg_escape_string($line_of_text[1]);
+		$schema = pg_escape_string($line_of_text[2]);
+		$categ = pg_escape_string($line_of_text[3]);
+		$sousCateg = pg_escape_string($line_of_text[4]);
+		$vSql = "INSERT INTO mouvements (nom_jap,nom_fr,schema,categorie,sous_categorie)
+		VALUES ('$nomJap','$nomFr','$schema','$categ','$sousCateg');";
+		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+		var_dump($vQuery);
+		return;
+	}
 	header('Location: init.php?message=csvMvtReceived');
 }
 
@@ -52,8 +89,8 @@ function traitementXMLKata($contenuNonParse){
 		$vSql = "INSERT INTO kata (nom_famille,nom_jap,nom_fr,description,videos,schema,ceinture,dans)
 		VALUES ('$famille','$nomJap','$nomFr','$desc','$video','$schema','$ceintureChoisie',$dan);";
 		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
-		header('Location: init.php?message=xmlKataReceived');
 	}
+		header('Location: init.php?message=xmlKataReceived');
 }
 
 function traitementXMLMouvements($contenuNonParse){
@@ -68,10 +105,8 @@ function traitementXMLMouvements($contenuNonParse){
 		$vSql = "INSERT INTO mouvements (nom_jap,nom_fr,schema,categorie,sous_categorie)
 		VALUES ('$nomJap','$nomFr','$schema','$categ','$sousCateg');";
 		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
-		var_dump($vQuery);
-		return;
-		header('Location: init.php?message=xmlMvtReceived');
 	}
+		header('Location: init.php?message=xmlMvtReceived');
 
 }
 
@@ -85,13 +120,12 @@ function traitementXMLGrades($contenuNonParse) {
 		else $dan = 0;
 		$vSql = "UPDATE karateka SET ceinture = '".$ceinture."', dans = '".$dan ."' WHERE nom = '".$nomKar."'";
 		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
-		header('Location: init.php?message=xmlGrdReceived');
 	}
+		header('Location: init.php?message=xmlGrdReceived');
 }
 
 function traitementCSV($fichier,$choixModif){
 	echo("TRAITEMENTCSV :" . $choixModif );
-	return;
 	switch ($choixModif){
 		case 'kata':
 			traitementCSVKata($fichier);
