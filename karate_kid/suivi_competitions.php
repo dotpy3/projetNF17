@@ -1,44 +1,54 @@
-<?php include("include/head.php"); ?>
+<?php include("include/head.php"); 
+$host='tuxa.sme.utc';
+	$port= '5432';
+	$dbname= 'dbnf17p146';
+	$user= 'nf17p146';
+	$password= 'htJ4IXmZ';
+	$GLOBALS['bdd'] = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
+	?>
 <body>
 	<?php include("include/menu.php"); ?>
 	<h1>Suivi des competitions</h1>
 		<form method="POST" action="suivi_competitions_action.php">
 			<table>
 				<tr><td>Choisir la compétition :</td><td>
+
 						<?php
+
 							echo "<select name='nom_competition'>";
-								$query = "SELECT `nom`
-											FROM `competition_katas`
-											ORDER BY `nom`;";
-								$reponse = $bdd->query($query);
+								$query = "SELECT nom
+											FROM competition_katas
+											ORDER BY nom;";
+								$reponse = pg_query($GLOBALS['bdd'],$query);
 								echo "<optgroup label='katas'>";
-								while($data = $reponse->fetch()){ echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
+								while($data = pg_fetch_array($reponse,null,PGSQL_ASSOC)){var_dump($data);
+								 echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
 								echo "</optgroup>";
 								
-								$query = "SELECT `nom`
-											FROM `competition_kumite`
-											ORDER BY `nom`;";	
-								$reponse = $bdd->query($query);
+								$query = "SELECT nom
+											FROM competition_kumite
+											ORDER BY nom;";	
+								$reponse = pg_query($GLOBALS['bdd'],$query);
 								echo "<optgroup label='kumite'>";
-								while($data = $reponse->fetch()){
+								while($data = pg_fetch_array($reponse,null,PGSQL_ASSOC)){var_dump($data);
 									echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
 								echo "</optgroup>";
 
-								$query = "SELECT `nom`
-											FROM `competition_tameshi_wari`
-											ORDER BY `nom`;";
-								$reponse = $bdd->query($query);
+								$query = "SELECT nom
+											FROM competition_tameshi_wari
+											ORDER BY nom;";
+								$reponse = pg_query($GLOBALS['bdd'],$query);
 								echo "<optgroup label='tameshi wari'>";
-								while($data = $reponse->fetch()){
+								while($data = pg_fetch_array($reponse,null,PGSQL_ASSOC)){var_dump($data);
 									echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
 								echo "</optgroup>";
 
-								$query = "SELECT `nom`
-											FROM `competition_mixte`
-											ORDER BY `nom`;";
-								$reponse = $bdd->query($query);
+								$query = "SELECT nom
+											FROM competition_mixte
+											ORDER BY nom;";
+								$reponse = pg_query($GLOBALS['bdd'],$query);
 								echo "<optgroup label='mixte'>";
-								while($data = $reponse->fetch()){
+								while($data = pg_fetch_array($reponse,null,PGSQL_ASSOC)){var_dump($data);
 									echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
 								echo "</optgroup>";
 							echo "</select><br/>";
