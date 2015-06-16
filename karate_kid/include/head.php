@@ -2,9 +2,9 @@
 <?php
 	$host='tuxa.sme.utc';
 	$port= '5432';
-	$dbname= 'dbnf17p130';
-	$user= 'nf17p130';
-	$password= 'wpBU2T6z';
+	$dbname= 'dbnf17p146';
+	$user= 'nf17p146';
+	$password= 'htJ4IXmZ';
 	try { $bdd = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password"); }
 	catch (Exception $e){
 	        die('Erreur : ' . $e->getMessage());

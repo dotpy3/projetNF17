@@ -4,42 +4,91 @@ include("include/head.php");
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["file"]["name"]);
 
+$host='tuxa.sme.utc';
+	$port= '5432';
+	$dbname= 'dbnf17p146';
+	$user= 'nf17p146';
+	$password= 'htJ4IXmZ';
+	try { $GLOBALS['bdd'] = pg_connect("host=".$host." port=".$port." dbname=".$dbname." user=".$user." password=".$password); } catch (Exception $e) { 
+		header('Location: init.php?error=dataBaseError');
+	}
+
 /* FONCTIONS */
 
 function checkNotEmpty($tab){
 	if(count($tab) == 0) header('Location: init.php?error=emptyFile');
 }
 
-function traitementXMLGrades($contenuNonParse){
-	$contenu = new SimpleXMLElement($contenuNonParse);
-	checkNotEmpty($contenu->grade);
-	foreach($contenu->grade as $gradeDispo){
-		//$vSql = "ALTER TYPE grades "
-	}
-}
-
 function traitementCSVKata($fichier){
-
-}
-
-function traitementCSVMouvements($fichier){
-
+	$vSql = "COPY kata FROM '$fichier' DELIMITER ',' CSV;";
+	$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+	header('Location: init.php?message=csvKataReceived');
 }
 
 function traitementCSVGrades($fichier){
+	$vSql = "COPY kata FROM '$fichier' DELIMITER ',' CSV;";
+	$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+	header('Location: init.php?message=csvKataReceived');
+}
+
+function traitementCSVMouvements($fichier){
+	$vSql = "COPY mouvements FROM '$fichier' DELIMITER ',' CSV;";
+	$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+	header('Location: init.php?message=csvMvtReceived');
+}
+
+function traitementXMLKata($contenuNonParse){
+	$contenu = new SimpleXMLElement($contenuNonParse);
+	checkNotEmpty($contenu->Kata);
+	foreach($contenu->Kata as $kataEtudie){
+		$famille = pg_escape_string($kataEtudie->Famille);
+		$nomJap = pg_escape_string($kataEtudie->NomJap);
+		$nomFr = pg_escape_string($kataEtudie->nomFrancais);
+		$desc = pg_escape_string($kataEtudie->Description);
+		$video = pg_escape_string($kataEtudie->Video);
+		$schema = pg_escape_string($kataEtudie->schema);
+		$ceintureChoisie = pg_escape_string($kataEtudie->ceinture);
+		$dan = pg_escape_string($kataEtudie->dans);
+		$vSql = "INSERT INTO kata (nom_famille,nom_jap,nom_fr,description,videos,schema,ceinture,dans)
+		VALUES ('$famille','$nomJap','$nomFr','$desc','$video','$schema','$ceintureChoisie',$dan);";
+		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+		header('Location: init.php?message=xmlKataReceived');
+	}
+}
+
+function traitementXMLMouvements($contenuNonParse){
+	$contenu = new SimpleXMLElement($contenuNonParse);
+	checkNotEmpty($contenu->Mouvement);
+	foreach($contenu->Mouvement as $mvtEtudie){
+		$nomJap = pg_escape_string($mvtEtudie->nomJap);
+		$nomFr = pg_escape_string($mvtEtudie->nomFr);
+		$schema = pg_escape_string($mvtEtudie->schema);
+		$categ = pg_escape_string($mvtEtudie->categorie);
+		$sousCateg = pg_escape_string($mvtEtudie->sousCategorie);
+		$vSql = "INSERT INTO mouvements (nom_jap,nom_fr,schema,ceinture,categorie,sous_categorie)
+		VALUES ($nomJap,$nomFr,$schema,$categ,$sousCateg);";
+		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+		header('Location: init.php?message=xmlMvtReceived');
+	}
 
 }
 
-function traitementXMLKata($contenuParse){
-
-}
-
-function traitementXMLMouvements($contenuParse){
-
+function traitementXMLGrades($contenuNonParse) {
+	$contenu = new SimpleXMLElement($contenuNonParse);
+	checkNotEmpty($contenu->insertionGrade);
+	foreach($contenu->insertionGrade as $gradeEtudie){
+		$nomKar = pg_escape_string($gradeEtudie->nomKarateka);
+		$ceinture = pg_escape_string($gradeEtudie->ceinture);
+		if ($ceinture == 'noire') $dan = $gradeEtudie->dans;
+		else $dan = 0;
+		$vSql = "UPDATE karateka SET ceinture = '".$ceinture."', dans = '".$dan ."' WHERE nom = '".$nomKar."'";
+		$vQuery = pg_query($GLOBALS['bdd'],$vSql);
+		header('Location: init.php?message=xmlGrdReceived');
+	}
 }
 
 function traitementCSV($fichier,$choixModif){
-	echo("TRAITEMENTCSV :" . $choixModif );/*
+	echo("TRAITEMENTCSV :" . $choixModif );
 	return;
 	switch ($choixModif){
 		case 'kata':
@@ -50,8 +99,7 @@ function traitementCSV($fichier,$choixModif){
 			break;
 		case 'grades':
 			traitementCSVGrades($fichier);
-			break;
-	}*/
+	}
 
 }
 
@@ -66,7 +114,6 @@ function traitementXML($contenu,$choixModif){
 			traitementXMLMouvements($contenu);
 			break;
 		case 'grades':
-			echo("test3");
 			traitementXMLGrades($contenu);
 			break;
 	}
@@ -102,11 +149,11 @@ $contenuFichier = file_get_contents($adresseFichier);
 if ($type == "text/csv"){
 	echo("csv<br />");
 	// CSV
-	//traitementCSV($adresseFichier,$choixTypeModif);
+	traitementCSV($adresseFichier,$choixTypeModif);
 } elseif ($type == "text/xml") {
 	echo("xml<br />");
 	// XML
-	try{traitementXML($contenuFichier,$choixTypeModif);} catch(\Exception $e) {var_dump($e);}
+	traitementXML($contenuFichier,$choixTypeModif);
 } else { // $type == "text/xml"
 //
 }

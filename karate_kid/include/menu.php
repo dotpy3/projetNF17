@@ -7,6 +7,7 @@
 				<li><a href="add_club.php">Club</a></li>
 				<li><a href="add_competition.php">Compétition</a></li>
 				<li><a href="add_match.php">Match</a></li>
+				<li><a href="init.php">Import</a></li>
 			</ul>
 		</li>
 		<li><a href="inscription.php">Inscrire</a></li>

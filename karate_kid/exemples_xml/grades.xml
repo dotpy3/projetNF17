@@ -1,8 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
 <grades>
-	<grade>Dan 1</grade>
-	<grade>Dan 2</grade>
-	<grade>Dan 3</grade>
-	<grade>Dan 4</grade>
-	<grade>Dan 5</grade>
+	<insertionGrade>
+		<nomKarateka>Juin</nomKarateka>
+		<dans>0</dans>
+		<ceinture>bleue</ceinture>
+	</insertionGrade>
 </grades>
