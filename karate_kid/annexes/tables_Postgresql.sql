@@ -91,8 +91,6 @@ CREATE TYPE categ AS ENUM ('offensive','deplacement','defense','technique de bra
 
 CREATE TYPE sous_categ AS ENUM ('poing','coude','pied','genou','position','projection','clé');
 
-
-
 CREATE TABLE mouvements (
 	nom_jap VARCHAR(100) PRIMARY KEY,
 	nom_fr VARCHAR(100) UNIQUE NOT NULL,
@@ -126,7 +124,7 @@ ALTER TABLE kata
 CREATE TABLE match_tameshi_wari ( 
 	nom_competition VARCHAR(100) UNIQUE NOT NULL, 
 	dateComp DATE UNIQUE NOT NULL,
-	num_match INTEGER NOT NULL, 
+	num_match BIGSERIAL NOT NULL, 
 	score_k1 INTEGER, 
 	score_k2 INTEGER, 
 	karateka1 INTEGER NOT NULL, 
@@ -142,7 +140,7 @@ ALTER TABLE match_tameshi_wari
 CREATE TABLE match_kumite (
 	nom_competition VARCHAR(100) NOT NULL,
 	dateComp DATE,
-	num_match INTEGER NOT NULL,
+	num_match BIGSERIAL NOT NULL,
 	score_k1 INTEGER,
 	score_k2 INTEGER,
 	karateka1 INTEGER NOT NULL,
@@ -158,27 +156,13 @@ ALTER TABLE match_kumite
 CREATE TABLE match_katas (
 	nom_competition VARCHAR(100) NOT NULL,
 	dateComp DATE NOT NULL,
-	num_match INTEGER NOT NULL,
+	num_match BIGSERIAL NOT NULL,
 	score_k1 INTEGER,
 	score_k2 INTEGER,
 	karateka1 INTEGER NOT NULL,
 	karateka2 INTEGER NOT NULL,
 	PRIMARY KEY (num_match,nom_competition, dateComp)
 );
-
-CREATE FUNCTION verifMATCH() RETURNS trigger AS $emp_stamp$
-    BEGIN
-        -- Check that karateka names are different
-        IF NEW.karateka1 == NEW.karateka2 THEN
-            RAISE EXCEPTION 'Impossible d avoir un match avec le meme karateka';
-        END IF;
-
-        RETURN NEW;
-    END;
-$emp_stamp$ LANGUAGE plpgsql;
-
-CREATE TRIGGER verifMATCHTrigger BEFORE INSERT OR UPDATE ON match_katas
-    FOR EACH ROW EXECUTE PROCEDURE verifMATCH();
 
 ALTER TABLE match_katas
   ADD CONSTRAINT fk_match_katas_nom_competition FOREIGN KEY (nom_competition,dateComp) REFERENCES competition_katas(nom,dateComp),
@@ -190,7 +174,7 @@ CREATE TYPE type_m AS ENUM ('katas','kumite','tameshi_wari');
 CREATE TABLE match_mixte (
 	nom_competition VARCHAR(100) NOT NULL,
 	dateComp DATE NOT NULL,
-	num_match INTEGER NOT NULL,
+	num_match BIGSERIAL NOT NULL,
 	score_k1 INTEGER,
 	score_k2 INTEGER,
 	karateka1 INTEGER NOT NULL,
@@ -243,8 +227,8 @@ ALTER TABLE autorise_mouvement
   ADD CONSTRAINT fk_AutoriseMvt_nom_mvt FOREIGN KEY (nom_mouvement) REFERENCES mouvements (nom_jap);
 
 CREATE TABLE maitrise (
-	id_karateka BIGSERIAL NOT NULL,
-	id_kata BIGSERIAL NOT NULL,
+	id_karateka INTEGER NOT NULL,
+	id_kata INTEGER NOT NULL,
 	PRIMARY KEY(id_karateka, id_kata)
 );
 
@@ -324,5 +308,28 @@ INSERT INTO mvt_ordre_katas (nom_mouvement, id_kata, ordre) VALUES
 
 
 
+
+CREATE FUNCTION verifMATCH() RETURNS trigger AS $emp_stamp$
+    BEGIN
+        -- Check that karateka names are different
+        IF NEW.karateka1 == NEW.karateka2 THEN
+            RAISE EXCEPTION 'Impossible d avoir un match avec le meme karateka';
+        END IF;
+
+        RETURN NEW;
+    END;
+$emp_stamp$ LANGUAGE plpgsql;
+
+CREATE TRIGGER verifMATCHTrigger BEFORE INSERT OR UPDATE ON match_katas
+    FOR EACH ROW EXECUTE PROCEDURE verifMATCH();
+
+CREATE TRIGGER verifMATCHTrigger BEFORE INSERT OR UPDATE ON match_mixte
+    FOR EACH ROW EXECUTE PROCEDURE verifMATCH();
+
+CREATE TRIGGER verifMATCHTrigger BEFORE INSERT OR UPDATE ON match_kumite
+    FOR EACH ROW EXECUTE PROCEDURE verifMATCH();
+
+CREATE TRIGGER verifMATCHTrigger BEFORE INSERT OR UPDATE ON match_tameshi_wari
+    FOR EACH ROW EXECUTE PROCEDURE verifMATCH();
 
 
