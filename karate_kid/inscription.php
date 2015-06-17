@@ -29,7 +29,7 @@
 						
 						echo "<select name='nom_competition'>";
 							while($data = pg_fetch_array($reponse)){
-								echo "<option value='".$data['nom']."'>".$data['nom']."</option>";
+								echo "<option value='".$data['nom']."/".$data['datecomp']."'>".$data['nom']."</option>";
 							}
 						echo "</select><br/>";
 					?>		

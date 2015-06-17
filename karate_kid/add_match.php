@@ -51,6 +51,7 @@ function getListClub(){
 			if (isset($_GET['retour'])){
 				if($_GET['retour'] == 'ok') echo "<h2>Enregistré !</h2>";
 				elseif($_GET['retour'] == 'samekarateka') echo "<h2>Impossible : même karateka</h2>";
+				elseif($_GET['retour'] == 'notInDB') echo "<h2>Impossible : karateka pas dans la BDD</h2>";
 			 else 
 				echo "Échec de l'ajout";
 			}
@@ -61,13 +62,7 @@ function getListClub(){
 			echo addOptionsToSelect("competition_tameshi_wari");
 			echo addOptionsToSelect("competition_mixte");
 
-			?>
-			<p>Club :</p>
-			<select name="choixClub">
-				<?php foreach(getListClub() as $clubChoisi){
-					echo "<option value=\"".$clubChoisi['id']."\">".$clubChoisi['nom']."</option>";
-				} ?>
-				</select>
+			?></select>
 				<p>Karatéka 1 :
 				<select name="choixk1">
 				<?php foreach(getListKaratekas() as $karatekaChoisi){

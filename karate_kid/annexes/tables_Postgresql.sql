@@ -240,7 +240,8 @@ CREATE TABLE inscription (
 	karateka INT,
 	type VARCHAR(30),
 	competition VARCHAR(100),
-	PRIMARY KEY (karateka, type, competition)
+	competdate DATE,
+	PRIMARY KEY (karateka, type, competition,competdate)
 );
 
 ALTER TABLE inscription

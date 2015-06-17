@@ -5,28 +5,32 @@
 		<h1>Inscription</h1>
 		<form>
 			<?php
+				$requete = explode("/",$_POST['nom_competition']);
+				var_dump($requete);
+				$nomCompet = $requete[0];
+				$dateCompet = $requete[1];
 				//élaboration de la requête SQL
 				//1.récupération des informations de la compétition
 				$query = "SELECT * FROM competition_katas
-					WHERE nom ='".$_POST['nom_competition']."'";
+					WHERE nom ='".$nomCompet."' AND datecomp = '".$dateCompet."'";
 				$reponse = pg_query($bdd,$query);
 				if($data = pg_fetch_array($reponse)) $typeCmpt = "katas";
 
 				else{
 					$query = "SELECT * FROM competition_kumite
-						WHERE nom ='".$_POST['nom_competition']."'";
+						WHERE nom ='".$nomCompet."' AND datecomp = '".$dateCompet."'";
 					$reponse = pg_query($bdd,$query);
 					if($data = pg_fetch_array($reponse)) $typeCmpt = "kumite";
 				
 					else{
 						$query = "SELECT * FROM competition_mixte
-							WHERE nom ='".$_POST['nom_competition']."'";
+							WHERE nom ='".$nomCompet."' AND datecomp = '".$dateCompet."'";
 						$reponse = pg_query($bdd,$query);
 						if($data = pg_fetch_array($reponse)) $typeCmpt = "mixte";
 
 						else{
 							$query = "SELECT * FROM competition_tameshi_wari
-								WHERE nom ='".$_POST['nom_competition']."'";
+								WHERE nom ='".$nomCompet."' AND datecomp = '".$dateCompet."'";
 							$reponse = pg_query($bdd,$query);
 							if($data = pg_fetch_array($reponse)) $typeCmpt = "tameshi_wari";
 
@@ -41,7 +45,7 @@
 					$competition = $data;
 					$query = "SELECT * FROM inscription
 							  WHERE type= '".$typeCmpt."'
-							  AND karateka=".$_POST['id_karateka'].";";
+							  AND karateka=".$_POST['id_karateka']." AND competition = '$nomCompet' AND competdate = '$dateCompet';";
 					if(!$reponse = pg_query($bdd, $query)){
 						echo "Ce karateka participe déjà à la compétition choisie !<br/>";
 					}
@@ -50,10 +54,11 @@
 						$debut = "INSERT INTO inscription VALUES (";
 						$id_karateka = $_POST['id_karateka'];
 						$typeCmpt = "'".$typeCmpt."'";
-						$nomCmpt = "'".$_POST['nom_competition']."'";
+						$nomCmpt = "'".$nomCompet."'";
+						$dateCompet = "'".$dateCompet."'";
 						$fin = ");";
 						
-						$query = $debut.$id_karateka.",".$typeCmpt.",".$nomCmpt.$fin;
+						$query = $debut.$id_karateka.",".$typeCmpt.",".$nomCmpt.",".$dateCompet.$fin;
 
 						//Test du succès de la requête d'insertion
 						if(!($reponse = pg_query($bdd, $query)))
@@ -68,7 +73,7 @@
 						$reponse = pg_query($bdd, $query);
 						$data = pg_fetch_array($reponse);
 
-						echo "Le karateka ".$data['nom']." a bien été ajouté à la compétition ".$_POST['nom_competition'];
+						echo "Le karateka ".$data['nom']." a bien été ajouté à la compétition ".$nomCompet;
 					}
 				}
 				else{
