@@ -7,7 +7,7 @@ CREATE TABLE club (
 
 CREATE TABLE professeur (
 	id BIGSERIAL PRIMARY KEY,
-	id_club BIGSERIAL NOT NULL,
+	id_club INTEGER NOT NULL,
 	nom VARCHAR(100) NOT NULL
 );
 
@@ -18,7 +18,7 @@ CREATE TYPE ceinture_couleur AS ENUM('blanche', 'jaune', 'orange', 'verte','bleu
 
 CREATE TABLE karateka (
 	id BIGSERIAL PRIMARY KEY,
-	id_club BIGSERIAL NOT NULL,
+	id_club INTEGER NOT NULL,
 	dans INTEGER,
 	nom VARCHAR(100) NOT NULL,
 	poids REAL,
@@ -34,7 +34,7 @@ ALTER TABLE karateka
 CREATE TABLE competition_tameshi_wari(
 	nom VARCHAR(100),
 	dateComp DATE,
-	id_club BIGSERIAL NOT NULL,
+	id_club INTEGER NOT NULL,
 	lieu VARCHAR(100) NOT NULL,
 	site_web VARCHAR(200),
 	photos VARCHAR(200),
@@ -48,7 +48,7 @@ ALTER TABLE competition_tameshi_wari
 CREATE TABLE competition_mixte(
 	nom VARCHAR(100),
 	dateComp DATE,
-	id_club BIGSERIAL NOT NULL,
+	id_club INTEGER NOT NULL,
 	lieu VARCHAR(100) NOT NULL,
 	site_web VARCHAR(200),
 	photos VARCHAR(200),
@@ -62,7 +62,7 @@ ALTER TABLE competition_mixte
 CREATE TABLE competition_katas(
 	nom VARCHAR(100),
 	dateComp DATE,
-	id_club BIGSERIAL NOT NULL,
+	id_club INTEGER NOT NULL,
 	lieu VARCHAR(100) NOT NULL,
 	site_web VARCHAR(200),
 	photos VARCHAR(200),
@@ -76,7 +76,7 @@ ALTER TABLE competition_katas
 CREATE TABLE competition_kumite(
 	nom VARCHAR(100),
 	dateComp DATE,
-	id_club BIGSERIAL NOT NULL,
+	id_club INTEGER NOT NULL,
 	lieu VARCHAR(100) NOT NULL,
 	site_web VARCHAR(200),
 	photos VARCHAR(200),
@@ -126,11 +126,11 @@ ALTER TABLE kata
 CREATE TABLE match_tameshi_wari ( 
 	nom_competition VARCHAR(100) UNIQUE NOT NULL, 
 	dateComp DATE UNIQUE NOT NULL,
-	num_match BIGSERIAL NOT NULL, 
+	num_match INTEGER NOT NULL, 
 	score_k1 INTEGER, 
 	score_k2 INTEGER, 
-	karateka1 BIGSERIAL NOT NULL, 
-	karateka2 BIGSERIAL NOT NULL, 
+	karateka1 INTEGER NOT NULL, 
+	karateka2 INTEGER NOT NULL, 
 	PRIMARY KEY (num_match, nom_competition, dateComp) 
 );
 
@@ -142,11 +142,11 @@ ALTER TABLE match_tameshi_wari
 CREATE TABLE match_kumite (
 	nom_competition VARCHAR(100) NOT NULL,
 	dateComp DATE,
-	num_match BIGSERIAL NOT NULL,
+	num_match INTEGER NOT NULL,
 	score_k1 INTEGER,
 	score_k2 INTEGER,
-	karateka1 BIGSERIAL NOT NULL,
-	karateka2 BIGSERIAL NOT NULL,
+	karateka1 INTEGER NOT NULL,
+	karateka2 INTEGER NOT NULL,
 	PRIMARY KEY (num_match,nom_competition, dateComp)
 );
 
@@ -158,11 +158,11 @@ ALTER TABLE match_kumite
 CREATE TABLE match_katas (
 	nom_competition VARCHAR(100) NOT NULL,
 	dateComp DATE NOT NULL,
-	num_match BIGSERIAL NOT NULL,
+	num_match INTEGER NOT NULL,
 	score_k1 INTEGER,
 	score_k2 INTEGER,
-	karateka1 BIGSERIAL NOT NULL,
-	karateka2 BIGSERIAL NOT NULL,
+	karateka1 INTEGER NOT NULL,
+	karateka2 INTEGER NOT NULL,
 	PRIMARY KEY (num_match,nom_competition, dateComp)
 );
 
@@ -190,11 +190,11 @@ CREATE TYPE type_m AS ENUM ('katas','kumite','tameshi_wari');
 CREATE TABLE match_mixte (
 	nom_competition VARCHAR(100) NOT NULL,
 	dateComp DATE NOT NULL,
-	num_match BIGSERIAL NOT NULL,
+	num_match INTEGER NOT NULL,
 	score_k1 INTEGER,
 	score_k2 INTEGER,
-	karateka1 BIGSERIAL NOT NULL,
-	karateka2 BIGSERIAL NOT NULL,
+	karateka1 INTEGER NOT NULL,
+	karateka2 INTEGER NOT NULL,
 	type_match type_m  NOT NULL,
 	PRIMARY KEY (num_match, nom_competition, dateComp)
 );
@@ -206,7 +206,7 @@ ALTER TABLE match_mixte
 
 CREATE TABLE mvt_ordre_katas (
 	nom_mouvement VARCHAR(100) NOT NULL,
-	id_kata BIGSERIAL NOT NULL,
+	id_kata INTEGER NOT NULL,
 	ordre INTEGER NOT NULL,
 	PRIMARY KEY (nom_mouvement,id_kata,ordre)
 );
@@ -218,9 +218,9 @@ ALTER TABLE mvt_ordre_katas
 CREATE TABLE auteur_coup (
 	nom_competition  VARCHAR(100) NOT NULL,
 	dateComp DATE NOT NULL,
-	num_match BIGSERIAL NOT NULL,
+	num_match INTEGER NOT NULL,
 	nom_mouvement VARCHAR(100) NOT NULL,
-	id_karateka BIGSERIAL NOT NULL,
+	id_karateka INTEGER NOT NULL,
 	ordre INTEGER NOT NULL,
 	PRIMARY KEY (nom_competition,dateComp,num_match,nom_mouvement,id_karateka,ordre)
 );
