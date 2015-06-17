@@ -91,6 +91,8 @@ CREATE TYPE categ AS ENUM ('offensive','deplacement','defense','technique de bra
 
 CREATE TYPE sous_categ AS ENUM ('poing','coude','pied','genou','position','projection','clé');
 
+
+
 CREATE TABLE mouvements (
 	nom_jap VARCHAR(100) PRIMARY KEY,
 	nom_fr VARCHAR(100) UNIQUE NOT NULL,
@@ -163,6 +165,20 @@ CREATE TABLE match_katas (
 	karateka2 BIGSERIAL NOT NULL,
 	PRIMARY KEY (num_match,nom_competition, dateComp)
 );
+
+CREATE FUNCTION verifMATCH() RETURNS trigger AS $emp_stamp$
+    BEGIN
+        -- Check that empname and salary are given
+        IF NEW.karateka1 == NEW.karateka2 THEN
+            RAISE EXCEPTION 'Impossible d avoir un match avec le meme karateka';
+        END IF;
+
+        RETURN NEW;
+    END;
+$emp_stamp$ LANGUAGE plpgsql;
+
+CREATE TRIGGER verifMATCHTrigger BEFORE INSERT OR UPDATE ON match_katas
+    FOR EACH ROW EXECUTE PROCEDURE verifMATCH();
 
 ALTER TABLE match_katas
   ADD CONSTRAINT fk_match_katas_nom_competition FOREIGN KEY (nom_competition,dateComp) REFERENCES competition_katas(nom,dateComp),
