@@ -46,8 +46,8 @@
 		$taille = $_POST['taille'];
 		$dateNais = "'".$_POST['naiss_annee']."-0".$_POST['naiss_mois']."-0".$_POST['naiss_jour']."'";
 		$ceinture = "'".$_POST['ceinture']."'";
-		if($_POST['ceinture'] == 'noire') $dans = $_POST['dans']; else $dans = "NULL";
-		if($_POST['photo']!="") $photo = "'".$_POST['photo'].""; else $photo = "NULL";
+		if(isset($_POST['ceinture']) && $_POST['ceinture'] == 'noire') $dans = $_POST['dans']; else $dans = "NULL";
+		if(isset($_POST['photo']) && $_POST['photo']!="") $photo = "'".$_POST['photo'].""; else $photo = "NULL";
 		$fin = ");";
 		
 		$query = $debut.$id.",".$club.",".$nom.",".$poids.",".$taille.",".$dateNais.",".$photo.",".$ceinture.",".$dans.$fin;

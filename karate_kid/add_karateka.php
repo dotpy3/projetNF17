@@ -53,7 +53,7 @@
 							$imax=$data['id'];
 							echo "<input type='checkbox' name='".$data['id']."' value='".$data['nom_famille']." - ".$data['nom_jap']."'/>".$data['nom_famille']." -- ".$data['nom_jap']." (".$data['nom_fr'].")<br/>";
 						}
-						echo "<input name='imax' value='".$imax."' HIDDEN />"
+						//echo "<input name='imax' value='".$imax."' HIDDEN />"
 					?>
 				</td></tr>
 			</table><br/>
