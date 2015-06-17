@@ -7,7 +7,7 @@ $host='tuxa.sme.utc';
 	$GLOBALS['bdd'] = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
 
 	function generateSelectQuery($typeComp,$nameComp){
-		$query="SELECT num_match, nom_competition, k1.nom AS idK1, k2.nom AS idK2
+		$query="SELECT num_match, nom_competition, datecomp, k1.nom AS idK1, k2.nom AS idK2
 			FROM ".$typeComp." 
 			LEFT JOIN karateka k1 ON karateka1 = k1.id
 			LEFT JOIN karateka k2 ON karateka2 = k2.id
@@ -28,7 +28,9 @@ $host='tuxa.sme.utc';
 		} else {
 			$echo = array();
 			do {
-				$echo[] = array('num_match' => $data['num_match'], 'nomMatch' => $data['idk1']." VS ".$data['idk2']);
+				$echo[] = array('num_match' => $data['num_match'],
+				'dateComp' => $data['datecomp'], 'nomCompet' => $data['nom_competition'],
+				 'nomMatch' => $data['idk1']." VS ".$data['idk2']);
 			} while ($data = pg_fetch_array($reponse,null,PGSQL_ASSOC));
 			return $echo;
 		}
@@ -39,7 +41,7 @@ $host='tuxa.sme.utc';
 		if (count($tabMatchs) == 0) return;
 		echo "<p>Sélection de match : </p><select name=\"num_match\">";
 		foreach($tabMatchs as $match){
-			echo "<option value='".$match['num_match']."'>".$match['nomMatch']."</option>";
+			echo "<option value='".$match['num_match']."/".$match['dateComp']."/".$match['nomCompet']."'>".$match['nomMatch']."</option>";
 		}
 		echo "</select>";
 		return;
