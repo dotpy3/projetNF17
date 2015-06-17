@@ -18,31 +18,34 @@ $host='tuxa.sme.utc';
 			$_POST['num_match']
 
 	*/
+
+	function getAssociatedMatch($typeMatch,$numMatch,$dateComp,$nomComp){
+		$query = 'SELECT score_k1,score_k2,karateka1,karateka2, k1.nom AS nomk1, k2.nom AS nomk2
+			 FROM '.pg_escape_string($typeMatch).' 
+
+			LEFT JOIN karateka k1 ON karateka1 = k1.id
+			LEFT JOIN karateka k2 ON karateka2 = k2.id
+			 WHERE num_match = '.$numMatch.
+		" AND datecomp = '".pg_escape_string($dateComp)."' AND nom_competition ='".$nomComp."'";
+		$reponse = pg_query($GLOBALS['bdd'],$query);
+		$data = pg_fetch_array($reponse);
+
+		return $data;
+	}
+	$compet = explode("/",$_POST['num_match']);
+	$resultat = getAssociatedMatch($_GET['type_match'],$compet[0],$compet[1],$compet[2]);
 	 ?>
 <body>
 	<?php include("include/menu.php"); ?>
-	<h1>Declarer le vainqueur</h1>
+	<h1>Résultat du match</h1>
 	<form method="POST" action="suivi_competition_action3.php">
 		<table>
-			<tr><td>Compétition :</td><td><?php echo $_POST['competition']; ?></td></tr>
+			<tr><td>Compétition : </td><td><?php echo $compet[2]; ?></td></tr>
+			
 			<?php
-				for($i=0; $i<5; $i++){
-					echo "<tr><td>
-						<select name='karateka_nom".$i."'>
-							<option>Liste karatekas</option>
-						</select>
-						</td><td>";
-					$query = "SELECT *
-								FROM `competition_`".$comp_type."
-								ORDER BY `id`;";
-					$reponse = $bdd->query($query);
-					
-					echo "<select name='nom_karateka'>";
-					while($data = $reponse->fetch()){
-						echo "<option value='".$data['id']."'>".$data['nom']." (".$data['dateNais'].")"."</option>";
-					}
-					echo "</select><br/>";
-			}
+				echo "<br />Match : ".$compet[0];
+				echo "<br />Karatéka 1 : ".$resultat['nomk1']." Résultat : ".$resultat['score_k1'];
+				echo "<br />Karatéka 1 : ".$resultat['nomk2']." Résultat : ".$resultat['score_k2'];
 			?>
 		</table><br/>
 		<input class="button" type="reset" value="Effacer"/>
