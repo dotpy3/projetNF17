@@ -6,7 +6,6 @@
 		<form>
 			<?php
 				$requete = explode("/",$_POST['nom_competition']);
-				var_dump($requete);
 				$nomCompet = $requete[0];
 				$dateCompet = $requete[1];
 				//élaboration de la requête SQL

@@ -64,7 +64,7 @@
 					$datak1 = pg_fetch_array(pg_query($bdd, $queryk1));
 					$queryk2 = "SELECT * FROM karateka WHERE id=".$data['karateka2'];
 					$datak2 = pg_fetch_array(pg_query($bdd, $queryk2));
-					echo "match n°".$data['num_match']." : ".$datak1['nom']." ".$data['score_k1']." - ".$data['score_k2']." ".$datak2['nom'];
+					echo "<br />match n°".$data['num_match']." : ".$datak1['nom']." ".$data['score_k1']." - ".$data['score_k2']." ".$datak2['nom'];
 				}
 				echo "</td></tr>";
 			}
