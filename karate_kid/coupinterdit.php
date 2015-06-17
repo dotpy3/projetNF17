@@ -36,10 +36,7 @@ function addOptionsToSelect($competitionType){
 			}
 			
 			echo "<select name=\"id_competition\">";
-			echo addOptionsToSelect("competition_katas");
 			echo addOptionsToSelect("competition_kumite");
-			echo addOptionsToSelect("competition_tameshi_wari");
-			echo addOptionsToSelect("competition_mixte");
 
 			?></select>
 				

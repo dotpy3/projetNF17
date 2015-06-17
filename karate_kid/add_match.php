@@ -86,10 +86,6 @@ function getListClub(){
 					<option value="tameshi_wari">Tameshi Wari</option>
 				</select>
 				</p>
-
-			<?php
-			echo "</select><br/>";
-		?>		
 		<input class="button" type="reset" value="Effacer"/>
 		<input class="button" type="submit" value="Valider"/>
 	</form>
