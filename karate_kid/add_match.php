@@ -50,6 +50,7 @@ function getListClub(){
 
 			if (isset($_GET['retour'])){
 				if($_GET['retour'] == 'ok') echo "<h2>Enregistré !</h2>";
+				elseif($_GET['retour'] == 'samekarateka') echo "<h2>Impossible : même karateka</h2>";
 			 else 
 				echo "Échec de l'ajout";
 			}

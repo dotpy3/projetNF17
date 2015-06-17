@@ -14,6 +14,8 @@ $host='tuxa.sme.utc';
 	 !isset($_POST['choixk2']) ||
 	 !isset($_POST['scorej2'])) header('Location: add_match.php?retour=fail');
 
+	if($_POST['choixk1'] == $_POST['choixk2']) header('Location: add_match.php?retour=samekarateka');
+
 		$competDecoupee=explode($_POST['choixClub'],"/");
 		$nomCompet = $competDecoupee[count($competDecoupee)-1];
 		$dateCompet = $competDecoupee[count($competDecoupee)-2]; $nomCompet ="";
