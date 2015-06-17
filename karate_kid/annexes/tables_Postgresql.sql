@@ -235,6 +235,16 @@ CREATE TABLE maitrise (
 ALTER TABLE maitrise
   ADD CONSTRAINT fk_Maitrise_id_karat FOREIGN KEY (id_karateka) REFERENCES karateka (id),
   ADD CONSTRAINT fk_Maitrise_id_kata FOREIGN KEY (id_kata) REFERENCES kata (id);
+  
+CREATE TABLE inscription (
+	karateka INT,
+	type VARCHAR(30),
+	competition VARCHAR(100),
+	PRIMARY KEY (karateka, type, competition)
+);
+
+ALTER TABLE inscription
+  ADD CONSTRAINT fk_inscription_id_karateka FOREIGN KEY (karateka) REFERENCES karateka(id);
 
 
 /* VALEURS D'INITIALISATION */
