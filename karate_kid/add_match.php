@@ -84,7 +84,6 @@ function getListClub(){
 				</select>
 				Score : <input type="text" name="scorej2">
 				</p>
-				<p>Lieu :</p><input type="text" name="lieu">
 				<p>Type match (pour les mixtes) :
 				<select name="typeMatch">
 					<option value="katas">Katas</option>
