@@ -82,6 +82,17 @@ $host='tuxa.sme.utc';
 
 					if ($nbMatchsACeNom == 0) echo "<p>Pas de matchs</p>";
 //				while($data = $reponse->fetch()){ echo "<option value='".$data['nom']."'>".$data['nom']."</option>"; }
+
+					// coups interdits
+					if ($redirection == 'match_kumite') {
+						echo "<h3>Liste coups interdits :</h3>";
+						$query = "SELECT nom_mouvement FROM autorise_mouvement WHERE nom_competition = '"
+							. $nom_comp."'";
+						$reponse = pg_query($GLOBALS['bdd'],$query);
+						while($data = pg_fetch_array($reponse)){
+							echo $data['nom_mouvement']."<br />";
+						}
+					}
 			?>
 		</table><br/>
 		<input class="button" type="reset" value="Effacer"/>
