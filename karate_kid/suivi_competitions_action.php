@@ -52,6 +52,7 @@ $host='tuxa.sme.utc';
 					$nbMatchsACeNom=0;
 
 					$query1=generateSelectQuery("match_katas",$nom_comp);
+					$nbMatchsACeNom+=count(getListMatch($query1));
 					$redirection = "";
 					if (count(getListMatch($query1)) > 0) $redirection="match_katas";
 
