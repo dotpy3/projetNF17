@@ -48,8 +48,12 @@ $host='tuxa.sme.utc';
 				echo "<br />Karatéka 1 : ".$resultat['nomk2']." Résultat : ".$resultat['score_k2'];
 			?>
 		</table><br/>
+		<!-- BOUTONS TOUJOURS PAREIL
+		BOUM BOUM DANS LE HTML
+		JS DE DEFONCE MAN
+		PAS DE FORMULAIRE, NORMAL, RIEN A DIRE
 		<input class="button" type="reset" value="Effacer"/>
-		<input class="button" type="submit" value="Valider"/>
+		<input class="button" type="submit" value="Valider"/> -->
 	</form>
 </body>
 <?php include("include/foot.php"); ?>
