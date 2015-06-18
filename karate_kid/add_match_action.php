@@ -7,7 +7,6 @@ $host='tuxa.sme.utc';
 	$GLOBALS['bdd'] = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
 
 	if(!isset($_POST['id_competition']) ||
-	 !isset($_POST['choixClub']) ||
 	 !isset($_POST['choixk1']) ||
 	 !isset($_POST['scorej1']) ||
 	 !isset($_POST['choixk2']) ||
