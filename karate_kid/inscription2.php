@@ -45,7 +45,9 @@
 					$query = "SELECT * FROM inscription
 							  WHERE type= '".$typeCmpt."'
 							  AND karateka=".$_POST['id_karateka']." AND competition = '$nomCompet' AND competdate = '$dateCompet';";
-					if(!$reponse = pg_query($bdd, $query)){
+
+					$reponse = pg_query($bdd, $query);
+					if($data = pg_fetch_array($reponse)){
 						echo "Ce karateka participe déjà à la compétition choisie !<br/>";
 					}
 					else {
