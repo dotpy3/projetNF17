@@ -323,7 +323,7 @@ INSERT INTO mvt_ordre_katas (nom_mouvement, id_kata, ordre) VALUES
 CREATE FUNCTION verifMATCH() RETURNS trigger AS $emp_stamp$
     BEGIN
         -- Check that karateka names are different
-        IF NEW.karateka1 == NEW.karateka2 THEN
+        IF NEW.karateka1 = NEW.karateka2 THEN
             RAISE EXCEPTION 'Impossible d avoir un match avec le meme karateka';
         END IF;
 
